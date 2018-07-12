@@ -25,4 +25,16 @@ pipeline {
             echo 'Things were different before...'
         }
     }
+    post {
+    	success {
+        	mail to: 'danielle.m.leboeuf@gmail.com',
+             subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
+             body: "Succeeded ${env.BUILD_URL}"
+    	}
+    	failure {
+        	mail to: 'danielle.m.leboeuf@gmail.com',
+             subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+             body: "Something is wrong with ${env.BUILD_URL}"
+    }
+}
 }
