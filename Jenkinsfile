@@ -9,8 +9,9 @@ pipeline {
     }
     post {
         always {
-            echo 'One way or another, I have finished'
-            deleteDir() /* clean up our workspace */
+            mail to: 'team@example.com',
+             subject: "Pipeline built: ${currentBuild.fullDisplayName}",
+             body: "There was a build! ${env.BUILD_URL}"
         }
         success {
             echo 'I succeeeded!'
@@ -25,16 +26,5 @@ pipeline {
             echo 'Things were different before...'
         }
     }
-    post {
-    	success {
-        	mail to: 'danielle.m.leboeuf@gmail.com',
-             subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
-             body: "Succeeded ${env.BUILD_URL}"
-    	}
-    	failure {
-        	mail to: 'danielle.m.leboeuf@gmail.com',
-             subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-             body: "Something is wrong with ${env.BUILD_URL}"
-    }
-}
+   
 }
