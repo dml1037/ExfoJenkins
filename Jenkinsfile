@@ -9,7 +9,7 @@ pipeline {
     }
     post {
         always {
-            mail to: 'danielle.m.leboeuf@gmail.com',
+            mail to: 'danielle.leboeuf@exfo.com',
              subject: "Pipeline built: ${currentBuild.fullDisplayName}",
              body: "There was a build! ${env.BUILD_URL}"
         }
